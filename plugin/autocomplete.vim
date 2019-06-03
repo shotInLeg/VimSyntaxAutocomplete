@@ -21,6 +21,13 @@ function! s:GetLastToken()
 endfunc
 
 
+function! s:SetupCompletion()
+    filetype plugin on
+    set omnifunc=syntaxcomplete#Complete
+    set completeopt=menuone,noinsert
+endfunc
+
+
 function! s:CompletionPopupMenu()
     let last_token = s:GetLastToken()
     echom last_token
@@ -36,6 +43,13 @@ function! s:CompletionPopupMenu()
 endfunc
 
 
+function! s:AutoSetupCompleter()
+    if exists('g:vsa#enable_completer') && g:vsa#enable_completer
+        call s:SetupCompletion()
+    endif
+endfunc
+
+
 function! s:AutoPopup()
     if exists('g:vsa#enable_auto_popup') && g:vsa#enable_auto_popup
         autocmd InsertCharPre * call s:CompletionPopupMenu()
@@ -43,4 +57,5 @@ function! s:AutoPopup()
 endfunc
 
 
+autocmd VimEnter * call s:AutoSetupCompleter()
 autocmd VimEnter * call s:AutoPopup()
