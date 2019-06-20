@@ -38,7 +38,7 @@ function! s:CompletionPopupMenu()
 
     if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
         " call feedkeys("\<C-x>\<C-o>", "n")
-        call feedkeys("\<C-x>\<C-n>", "n")
+        silent! call feedkeys("\<C-x>\<C-n>", "n")
     endif 
 endfunc
 
